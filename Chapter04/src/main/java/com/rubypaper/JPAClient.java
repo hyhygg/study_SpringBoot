@@ -17,32 +17,32 @@ public class JPAClient {
 		EntityManager em = emf.createEntityManager();
 		
 		// Transaction 생성
-		//EntityTransaction tx = em.getTransaction();
+		EntityTransaction tx = em.getTransaction();
 		
 		try {
 			// Transaction 시작
-			//tx.begin();
+			tx.begin();
 			
-//			Board board = new Board();
-//			board.setTitle("JPA 제목");
-//			board.setWriter("관리자");
-//			board.setContent("JPA 글 등록 잘 되네요.");
-//			board.setCreateDate(new Date());
-//			board.setCnt(0L);
+			Board board = new Board();
+			board.setTitle("JPA 제목");
+			board.setWriter("관리자");
+			board.setContent("JPA 글 등록 잘 되네요.");
+			board.setCreateDate(new Date());
+			board.setCnt(0L);
 			
 			// 글 등록
-			//em.persist(board);
+			em.persist(board);
 			
 			// 글 상세 조회
-			Board searchBoard = em.find(Board.class, 1L);
-			System.out.println("---> " + searchBoard.toString());
+//			Board searchBoard = em.find(Board.class, 1L);
+//			System.out.println("---> " + searchBoard.toString());
 			
 			// Transaction commit
-			//tx.commit();
+			tx.commit();
 		} catch(Exception e) {
 			e.printStackTrace();
 			// Transaction rollback
-			//tx.rollback();
+			tx.rollback();
 		} finally {
 			em.close();
 			emf.close();
