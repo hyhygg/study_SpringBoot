@@ -1,6 +1,7 @@
 package com.rubypaper;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -33,12 +34,38 @@ public class JPAClient {
 			// 글 등록
 			em.persist(board);
 			
+			// Transaction commit
+			tx.commit();
+			
+			// Transaction 시작
+			tx.begin();
+			
+			// 글 목록 조회
+			String jpql = "select b from Board b order by b.seq desc";
+			List<Board> boardList = em.createQuery(jpql, Board.class).getResultList();
+			for(Board brd : boardList) {
+				System.out.println("---> " + brd.toString());
+			}
+			
 			// 글 상세 조회
 //			Board searchBoard = em.find(Board.class, 1L);
 //			System.out.println("---> " + searchBoard.toString());
 			
+			// 수정할 게시글 조회
+//			Board board = em.find(Board.class, 1L);
+//			board.setTitle("검색한 게시글의 제목 수정");
+			
+			// 삭제할 게시글 조회
+//			Board board1 = em.find(Board.class, 1L);
+//			board1.setSeq(1L);
+			
+			// 게시글 삭제
+//			board1.setSeq(1L);
+//			em.remove(board1);
+			
 			// Transaction commit
 			tx.commit();
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 			// Transaction rollback
