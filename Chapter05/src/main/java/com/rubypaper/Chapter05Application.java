@@ -11,6 +11,5 @@ public class Chapter05Application {
 		SpringApplication application = new SpringApplication(Chapter05Application.class);
 		application.setWebApplicationType(WebApplicationType.NONE);
 		application.run(args);
-		
 	}
 }
